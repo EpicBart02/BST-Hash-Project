@@ -48,9 +48,9 @@ In what follow we give you the **mandatory report headlines** and brief comments
 ************************
 
 # Mini-project report 
-Members: Sedra Altunji and Abdul Rahman  
-Program: CTMAT and   
-Course: 1DT901  
+Members: Sedra Altunji and Abdul Rahman Racheed
+Program: CTMAT and NGDPV	
+Course: 1DT901 and 1DV501
 Date of submission: 2022-11-06
 
 
