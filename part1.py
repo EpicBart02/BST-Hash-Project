@@ -34,8 +34,7 @@ def top_10(file):
                 dct[word] = 1
         else:
             False                      #If the len of the word is less then 4, it returns as false and doesnt get included in the dct
-    counts = Counter(dct)
-    return counts.most_common(10)
+    return Counter(dct).most_common(10)
 
 for text_file in [text_file1]:
     unique_words = get_unique_words(text_file)
