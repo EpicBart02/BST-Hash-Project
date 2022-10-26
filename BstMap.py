@@ -19,16 +19,45 @@ class Node:
     right: Any = None       # right child (a Node)
 
     def put(self, key, value):
-        pass       # Placeholder code ==> to be replaced
+
+        if key < self.key:
+            if self.left == None:
+                self.left = Node(key, value)   #If it reaches an empty node, it creates a node with the input key and value
+            else:
+                self.left.put(key, value)    #If the node isnt empty, the key moves down and restarts until it finds an empty node
+        #The same thing but in the right side of the tree 
+        if key > self.key:
+            if self.right == None:
+                self.right = Node(key, value)
+            else:
+                self.right.put(key, value)
+
+
+
+
+#        if key < str(self.key):         #A recursive method if the key is less than the current key
+#            if self.left is None:
+#                return Node(key, value)
+#            else:
+#                self.left(key, value)
+#        if key > str(self.key):
+#            if self.right is None:
+#                return Node(key, value)
+#            else:
+#                self.right(key, value)
 
     def to_string(self):
-        return ""  # Placeholder code to avoid crash in demo program. To be replaced
+         print()  # Placeholder code to avoid crash in demo program. To be replaced
 
     def count(self):
         pass       # Placeholder code ==> to be replaced
 
-    def get(self, key):
-        pass    # Placeholder code ==> to be replaced
+    def get(self, key): 
+        pass
+    #    if self.key == None:
+    #        return None
+    #    else:
+    #        return self.key.value
 
     def max_depth(self):
         pass     # Placeholder code ==> to be replaced
