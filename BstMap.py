@@ -19,10 +19,20 @@ class Node:
     right: Any = None       # right child (a Node)
 
     def put(self, key, value):
-        pass       # Placeholder code ==> to be replaced
+        dct = {key : value}
+        if key < str(self.key):         #A recursive method if the key is less than the current key
+            if self.left is None:
+                self.left = Node(key, value)
+            else:
+                self.left.put(key, value)
+        if key > str(self.key):
+            if self.right is None:
+                self.key = Node(key, value)
+            else:
+                self.right.put(key, value)
 
     def to_string(self):
-        return ""  # Placeholder code to avoid crash in demo program. To be replaced
+         ""  # Placeholder code to avoid crash in demo program. To be replaced
 
     def count(self):
         pass       # Placeholder code ==> to be replaced
