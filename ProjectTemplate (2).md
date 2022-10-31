@@ -73,8 +73,11 @@ The text should include:
  	* Python code for function ``add``, how to compute the hash value, and rehashing.
  	* Point out and explain any differences from the given results in ``hash_main.py``
  	
-- For the BST based map (BstMap), present (and explain in words):
- 	* Python code for the two functions ``put`` and ``max_depth``.
+- For the BST based map (BstMap), present (and explain in words):.
+	Firstly, the code for ``put``, The only way i can explain it is that i based the BST sorting based on the key, the letters. 
+	[Left side]: If the input key is less then the current key on the Tree, it moved LEFT of that current Node. If the space is empty, the list created a new node and put the input key and its value inside of that node. But if there already was a node in that slot, the input key moves down one space in the Tree and the current key becomes that left node we were talking about earlier, the input key travels down until it finds an empty space it fits in. 
+	[Right side]: The right side of the tree is essentially the same as the left, but instead of it letting trough lower valued keys, it only lets the keys who are higher then the current key trough. The node travels down the same way as before though. 
+	The code for ``max_depth`` was not very difficult once you understood the recursive methods of the BST. Firstly i go down the tree and make sure that the 
  	* Point out and explain any differences from the given results in ``bst_main.py``.
 
 ## Part 3: Count unique words 2

@@ -1,6 +1,18 @@
 
-c = None
-a = 1
+loo = "aa34"
+lee = "bree"
+c = ","
+loo += lee
+loo += c
+loo = loo.split()
+print(loo)
+beeboo = [["Bee,34"]]
+broro = ["Bro,45"]
+beeboo.append(loo)
 
-if a < c:
-    print("HELLO")
+lala = []
+
+print(beeboo)
+lost = list(map(tuple, beeboo))
+
+print(lala[list(map(tuple, beeboo))])
