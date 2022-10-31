@@ -30,7 +30,7 @@ def top_10(file):
         if len(word) > 4:              #Tell the code that the minimum length of a word has to be 4 or more
             if word in dct:
                 dct[word] += 1         #If a word is brought up for the first time, it gets a value of 1, else it gets +1
-            if word not in dct:
+            else:
                 dct[word] = 1
         else:
             False                      #If the len of the word is less then 4, it returns as false and doesnt get included in the dct

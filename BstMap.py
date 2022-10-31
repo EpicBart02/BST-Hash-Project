@@ -1,5 +1,7 @@
 from dataclasses import dataclass
+from turtle import right
 from typing import Any
+
 
 # The BstMap class is a binary search tree based implementation of
 # a map (or dictionary). It works for any type of values and for
@@ -25,50 +27,74 @@ class Node:
                 self.left = Node(key, value)   #If it reaches an empty node, it creates a node with the input key and value
             else:
                 self.left.put(key, value)    #If the node isnt empty, the key moves down and restarts until it finds an empty node
-        #The same thing but in the right side of the tree 
-        if key > self.key:
+        elif key > self.key:#The same thing but in the right side of the tree 
             if self.right == None:
                 self.right = Node(key, value)
             else:
                 self.right.put(key, value)
+        if key == self.key:                 #If the key is the same, override the current value with the input value
+           self.value = self.value + 1
 
-
-
-
-#        if key < str(self.key):         #A recursive method if the key is less than the current key
-#            if self.left is None:
-#                return Node(key, value)
-#            else:
-#                self.left(key, value)
-#        if key > str(self.key):
-#            if self.right is None:
-#                return Node(key, value)
-#            else:
-#                self.right(key, value)
 
     def to_string(self):
-         print()  # Placeholder code to avoid crash in demo program. To be replaced
+        this_node = ""     #Create an empty string to hold the data
+        if self.left is not None:
+            this_node += self.left.to_string()                       #Take the left most node
+        this_node += "(" + self.key + ","  + str(self.value) + ")"   #Add it to the string
+        if self.right is not None:
+                this_node += self.right.to_string()   #Take the right node and go back to
+        return this_node                              #the start and check if it has a left node
 
     def count(self):
-        pass       # Placeholder code ==> to be replaced
+        count = 1                    #Literally the same as to_string function
+        if self.left is not None:    #but instead of adding key and value to a string
+            count += self.left.count() #it adds 1 to the counter 
+        if self.right is not None:
+            count += self.right.count()
+        return count
 
-    def get(self, key): 
-        pass
-    #    if self.key == None:
-    #        return None
-    #    else:
-    #        return self.key.value
+    def get(self, key):
+         if key < self.key:
+            if self.left == None:     #If the node doesnt exist, return None
+                return "None"
+            else:
+                return self.left.get(key)  #Somewhat same as the last function
+         if key > self.key:                #but instead of printing, searches for the key node
+            if self.right == None:
+                return "None"         #If the node doesnt exist, return None
+            else:
+                return self.right.get(key)
+         if key == self.key:          #If the key found itself in the tree, print its value
+            return self.value
 
     def max_depth(self):
-        pass     # Placeholder code ==> to be replaced
+        if self.left is not None:
+            left_depth = self.left.max_depth()   #If there is a node, the depth increases depending on how low down the node is in the map
+        else:
+            left_depth = 0                       
+        if self.right is not None:
+            right_depth = self.right.max_depth()
+        else:
+            right_depth = 0
+        return max(left_depth, right_depth) + 1       #Print the maximum depth between the two sides of the map, if right is higher
+                                                      #it gets printed, vice versa
 
     def count_leafs(self):
-        pass     # Placeholder code ==> to be replaced
+        if self.left == None or self.right == None:
+            return 1
+        return self.left.count_leafs() + self.right.count_leafs()
 
     # We do a left-to-right in-order traversal of the tree
     # to get the key-value pairs sorted base on their keys
     def as_list(self, lst):
-        return [None]    # Placeholder code to avoid crash in demo program. To be replaced
+        node = (self.key, self.value)
+        if self.left is not None:
+            lst.extend(self.left.as_list([]))
+        lst.append(node)
+        if self.right is not None:
+            lst.extend(self.right.as_list([]))
+        return lst
+      
 
 
 # The BstMap class is rather simple. It basically just takes care
