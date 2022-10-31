@@ -80,9 +80,12 @@ class Node:
                                                       #it gets printed, vice versa
 
     def count_leafs(self):
-        if self.left == None or self.right == None:
+        if not self.left and not self.right:       
             return 1
-        return self.left.count_leafs() + self.right.count_leafs()
+        left = self.left.count_leafs() if self.left else 0
+        right = self.right.count_leafs() if self.right else 0
+        return left + right
+
 
     # We do a left-to-right in-order traversal of the tree
     # to get the key-value pairs sorted base on their keys
