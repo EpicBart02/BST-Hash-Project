@@ -7,12 +7,10 @@ from collections import Counter
 def get_unique_words(text_file): 
     f = open(text_file, 'r', encoding='utf-8') 
     text = f.read()
-
     #cleaning
     text = text.lower()                 #convert the words to lower casre 
-    words = text.split()                  #splite each word into a list 
-    words = [word.strip('.,!";()[]') for word in words]         #clean the symbols in file
-    words = [word.replace("'s", '') for word in words]          
+    words = text.split()                  #split each word into a list 
+    words = [word.strip('.,!";()[]') for word in words]         #clean the symbols in file          
     # change the type for the words, list --> set
     words = set(words)
     return words

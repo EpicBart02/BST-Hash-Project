@@ -32,8 +32,16 @@ class Node:
                 self.right = Node(key, value)
             else:
                 self.right.put(key, value)
-        if key == self.key:                 #If the key is the same, override the current value with the input value
-           self.value = self.value + 1
+        if key == self.key:       #If the key is the same, override the current value with the input value
+            if value > self.value:                
+                self.value = value
+            elif value <= self.value:
+                self.value = self.value + 1
+
+    def top_10(self):
+        def my_sort(t):
+          return t[1]
+        return sorted(self.as_list([]), key=my_sort, reverse=True)[:10]
 
 
     def to_string(self):
@@ -82,8 +90,14 @@ class Node:
     def count_leafs(self):
         if not self.left and not self.right:       
             return 1
-        left = self.left.count_leafs() if self.left else 0
-        right = self.right.count_leafs() if self.right else 0
+        if self.left is not None:
+            left = self.left.count_leafs()
+        else:
+            left = 0
+        if self.right is not None:
+            right = self.right.count_leafs()
+        else:
+            right = 0
         return left + right
 
 
@@ -93,7 +107,10 @@ class Node:
         node = (self.key, self.value)
         if self.left is not None:
             lst.extend(self.left.as_list([]))
-        lst.append(node)
+        if self not in lst:
+         lst.append(node)
+        else:
+            lst.append(self.key, self.value + 1)
         if self.right is not None:
             lst.extend(self.right.as_list([]))
         return lst
@@ -115,6 +132,12 @@ class BstMap:
             self.root = Node(key, value, None, None)
         else:
             self.root.put(key, value)
+    
+    def top_10(self):
+        if self.root is None:
+            return "[  ]"
+        else:
+            return self.root.top_10()
 
     # Returns a string representation of all the key-value pairs
     def to_string(self):
