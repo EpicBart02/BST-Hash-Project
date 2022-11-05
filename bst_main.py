@@ -6,6 +6,7 @@ d = {"Ella": 39, "Owen": 40, "Fred": 44, "Zoe": 41, "Adam": 27, "Ceve": 37}
 map = bst.BstMap()
 for k, v in d.items():
     map.put(k, v)
+print(map)
 print(map.to_string())        # { (Adam,27) (Ceve,37) (Ella,39) (Fred,44) (Owen,40) (Zoe,41) }
 print("Size:", map.size())    # 6
 

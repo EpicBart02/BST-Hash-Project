@@ -25,7 +25,7 @@ def hashing(file):
 def open_file(file):
     f = open(file, 'r', encoding='utf-8')
     for word in f:
-        if len(word) > 4:
+        if len(word) > 5:
             map.put(word, 1)
     print("The number of tree nodes is:" , map.size())
     print("The max depth is" , map.max_depth() , "and the number of leaf nodes are" , map.count_leafs())

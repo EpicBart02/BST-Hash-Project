@@ -25,7 +25,7 @@ def top_10(file):
     f = open(file, 'r', encoding='utf-8')
     dct = {}                           #Create an empty set to store all the unique words that have a len over 4
     for word in f:
-        if len(word) > 4:              #Tell the code that the minimum length of a word has to be 4 or more
+        if len(word) > 5:              #Tell the code that the minimum length of a word has to be 4 or more
             if word in dct:
                 dct[word] += 1         #If a word is brought up for the first time, it gets a value of 1, else it gets +1
             else:
