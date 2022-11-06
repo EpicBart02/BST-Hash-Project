@@ -41,7 +41,9 @@ class Node:
     def top_10(self):
         def my_sort(t):
           return t[1]
-        return sorted(self.as_list([]), key=my_sort, reverse=True)[:10]
+        lst = self.as_list([])
+        lst = filter(lambda x: len(x[0]) >5, lst)
+        return sorted(lst, key=my_sort, reverse=True)[:10]
 
 
     def to_string(self):

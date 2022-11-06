@@ -6,12 +6,6 @@ Program: CTMAT and NGDPV
 Course: 1DT901 and 1DV501
 Date of submission: 2022-11-06
 
-## Introduction  
-
-This project, mini-project, is a part of the course 1DT901 and it is a project in algorithms and data structures. In this project, three different tasks are going to be solved. Task 1 is Count unique words 1, in this task the number of unique words will be counted from the files ’life of brain’ and ’swedish_news_2020’ with the help of Python set class. Also, in task 1, the ten most frequently used words having a length larger than 4 in each file have to be produced with the help of Python dictionary class. 
-Task 2, Implementing data structures, 
-The last task, Count unique words 2
-
 ## Part 1: Count unique words 1
 ``life_of_brian`` had 2064 special/unique words while  ``swedish_news_2020`` had rougly 384000 words. We counted the special/unique words by simply using pythons built in sets. A set does not allow two of the same words to exist in the same set, so firstly we lower and split each word in the text files to get them prepared. And after that we place the words in a for loop to get rid of the special symbols by using ```word.strip()```
 The code looks something like this.
@@ -32,11 +26,20 @@ if word in dct:
 ```Counter(dct).most_common(10)```
 
 ## Part 2: Implementing data structures
-- For the hash based word set (HashSet), present (and explain in words):
- 	* Python code for function ``add``, how to compute the hash value, and rehashing.
- 	* Point out and explain any differences from the given results in ``hash_main.py``
- 	
-- For the BST based map (BstMap), present (and explain in words):.
+- Hashing, ```HashSet.py```
+Computing the hash value takes place with the help of the function get_hash, which takes words as arguments, then it calculates and returns those hash value using ```ord(c)``` It then returns the numeric for each letter in a word and then sums all the values of the letters to get the hash value for each word in the string. 
+```python
+return sum([ord(c) for c in word]
+```
+For the add function, the hash value will be calculated at first, then we will go through all the buckets to find the position of the hash value and check if the given element exists, if not, it will be appended. Also when we do append a word in the buckets, we increase the self.size by one because we do increase bucket size by one.
+```python
+if word not in self.buckets[hash_value]:   
+      self.buckets[hash_value].append(word)
+      self.size += 1
+```
+If the bucket is full, we have to rehash it to increase its size. With rehashing, we mean to double the size of a bucket list when it is full. To do that, the old buckets must be saved first, so they don´t get deleted. ```temp_buckets = self.buckets``` Then, a bucket with double the len of the previous one must be created and at the same time we set ```self.size = 0``` so that when we add the words back the self size will be correct. At the end, re-adding the old bucket must be implemented.
+
+- BST, ```BSTMap.py```
 Firstly, the code for ``put``, The only way i can explain it is that i based the BST sorting based on the key, the letters. 
 [Left side]: If the input key is less then the current key on the Tree, ```if key < self.key:```, it moves LEFT of that current Node. If the space is empty, the list created a new node and put the input key and its value inside of that node. 
 ```python
@@ -47,15 +50,18 @@ But if there already was a node in that slot, the input key moves down one space
 [Right side]: The right side of the tree is essentially the same as the left, but instead of it letting trough lower valued keys, it only lets the keys who are higher then the current key trough. The node travels down the same way as before though. To put it simply, it works exactly same way as the the left side, but takes in the higher values instead of lower values.
 
 The code for ``max_depth`` was not very difficult once you understood the recursive methods of the BST. I recursively go down the tree and grab the value of the current node. Not the value as in key, value, but as in how far down it is in the tree. So each time we move, we grab the node's value.
-In the end we ta
-* Point out and explain any differences from the given results in ``bst_main.py``.
-
+In the end we return the highest value between left and right plus one to check the maximum depth of our tree. ```return max(left_depth, right_depth) + 1 ``` 
+* Our BST map did not have any different outcomes since the binary tree can only be built one way. So the outcome will always be the same if its built the same way.
 ## Part 3: Count unique words 2
 
-This part was very easily solved by using sort. Firstly i created two methods within the BstMap.py file. top_10 and my_sort. My sort took in a tuple and returned the second element within it. So instead of returning the key, it returned the value.```return t[1]```. after that i sorted all the words from lowest to highest, and reversed the order of the list by using ```reverse=True``` and printed the first 10 elements in the reversed list. the output are the 10 words that came up most frequently in the file.
+This part was very easily solved by using sort. Firstly i created two methods within the BstMap.py file. top_10 and my_sort. My sort took in a tuple and returned the second element within it. So instead of returning the key, it returned the value.```return t[1]```. Thus it was time to get all the words with the len over 5. So i used filter and lambda to  filter out all words with a len below 5. 
+```python
+lst = filter(lambda x: len(x[0]) >5, lst)
+```
+After that i sorted all the words from lowest to highest, and reversed the order of the list by using ```reverse=True``` and printed the first 10 elements in the reversed list. the output are the 10 words that came up most frequently in the file.
 The code looks something like this
 ```python
-return sorted(self.as_list([]), key=my_sort, reverse=True)[:10]
+return sorted(lst, key=my_sort, reverse=True)[:10]
 ```
 Also in part3.py, i set the minimum len of the word to 5 and over because its not allowed to have words with a len of 4 or less as stated in the project instructions. 
 
@@ -63,9 +69,14 @@ The top 10 most frequent words in Life if brian are, Brian, Centurion, Crowd, Mo
 
 And lastly the top 10 most frequent words in Swe news are as stated: säger, under, kommer, efter, eller, också, andra, finns, sedan and lastly procent. The output is the same in part 1.
 
-* What is the bucket list size, max bucket size and zero bucket ratio for HashSet, and the total node count, max depth and leaf count for BstMap, after having added all the words in the two large word files? (Hence, eight different numbers.)
+- BST and Hash values for the two text files
+```life_of_brian's``` bucket size is 2079, the max bucket size stands at a 16 and lastly the zero bucket ratio is around 0.83. Now the results from the BST map, ```life_of_brian's``` total node count is the exact same as the total bucket size. Its max depth is 28 while the total leaf count is 662.
+```swedish_news_2020's``` Bucket size stands at 384 501 words. Same goes for its total nodes in the BST. Max bucket size for swe news is 682 while zero bucket ratio stands at 0.99. The maximum depth is 83 and the leaf node count is 126 661.
 * Explain how max bucket size and zero bucket ratio can be used to evaluate the quality of your hash function in HashSet. What are optimal/reasonable/poor values in both cases?
 * Explain how max depth and leaf count can be used to evaluate the efficiency of the BstMap. What are optimal/reasonable/poor values in both cases?
+The efficiency of a binary search tree depends ofcourse how its built. A balanced search tree is the most efficient, a tree that is built to be filled at each level and that has as low of a depth as possible. The more leaf nodes the better. That is because the less levels there are in a binary tree, the faster it takes to search trough it. That is why a large maximum depth is not as time efficient as a balanced tree. 
+The best case scenario for leaf nodes is when each non leaf has at most two children. 
+
 
 
 ## Project conclusions and lessons learned
@@ -73,19 +84,18 @@ We separate technical issues from project related issues.
 ### Technical issues 
 The most time consuming part by far was the BST map. Binary search trees were a whole new experience from anything we've encountered before. This was a structured way to store information like we havent seen before in programming. Working on it without having the faintest idea how they work was not an option. We had to thoroughly research about binary search trees and how they worked. The more we read, the more complicated it was. But once we learned about recursive functions everything became clearer. Working with recursive methots simplified our learning experience with BST maps quite significantly. Also it became much more fun. So Id say working with binary search trees when we had no idea what it was in the beginning was the most difficult part of the project.
 
-- What lessons have you learned? What should you have done differently if you now were facing a similar problem.
 The most important lesson is most likely not to look at code as an explanation, but just a watered down solution. For example, reading code about recursive methods did not help me at all. I was just as confused as i was coming into it. 
 Reading and understanding what im working with fundamentally helped way more in my work. Looking at code does not do anything to teach us how it works, just what the solution COULD be. And we did not like that so researching how it fundamentally worked was the best decision we made. And we're sure to bring that with us in later studies aswell. Looking at solutions does not teach us anything, but understanding the methods and how it fundamentally works teaches us quite a lot.
 
-- How could the results be improved if you were given a bit more time to complete the task.
-The results would probably be cleaner. Easier to read code, more time efficient and all in all better code. Of course you dont always have time but in this hypothetical scenario, i would probably say the outcome wouldve been a cleaner result.
+The results would probably be cleaner if we had more time. Easier to read code, more time efficient and all in all better code. Of course you dont always have time but in this hypothetical scenario, i would probably say the outcome wouldve been a cleaner result.
 
 ### Project issues
-- Describe how your team organized the work. How did you communicate? How often did you communicate?
 We communicated every day or every other day. We were very active on telling eachother how far we've gotten and what we've done and implemented.
 
 - For each individual team member: 
- 	* Describe which parts (or subtasks) of the project they were responsible for. Consider writing the report as a separate task. Try to identify main contributors and co-contributors.
-	Abdul was the main contributor for the BST maps and part 3 while Sedra was the main contributor for the hashing and part 1. Ofcourse we both worked on everything together but we tried splitting up the work in the beginning. Every update time we talked we explained what we implemented and what didnt work. And we tried solving tj
+ 	* Contributors and co-contributors?
+	Abdul was the main contributor for the BST maps and part 3 while Sedra was the main contributor for the hashing and part 1. Ofcourse we both worked on everything together but we tried splitting up the work in the beginning. Every update time we talked we explained what we implemented and what didnt work. And we tried solving it.(Abdul)
  	* Estimate hours spend each week (on average)
+    Cirka 3 hours every day so around 21 hours per week.(Abdul)
  - What lessons have you learned? What should you have done differently if you now were facing a similar project.
+ As stated before, reading thouroughly about the subject is a great help. So ill be sure to bring that with me going forward in other projects. (Abdul)
