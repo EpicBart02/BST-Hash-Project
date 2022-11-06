@@ -59,25 +59,31 @@ In the end we return the highest value between left and right plus one to check 
 * Our BST map did not have any different outcomes since the binary tree can only be built one way. So the outcome will always be the same if its built the same way.
 ## Part 3: Count unique words 2
 
-This part was very easily solved by using sort. Firstly i created two methods within the BstMap.py file. top_10 and my_sort. My sort took in a tuple and returned the second element within it. So instead of returning the key, it returned the value.```return t[1]```. Thus it was time to get all the words with the len over 5. So i used filter and lambda to  filter out all words with a len below 5. 
+This part was very easily solved by using sort. Firstly, two methods within the BstMap.py file was created, top_10 and my_sort. My sort took in a tuple and returned the second element within it. Instead of returning the key, it returned the value.return t[1]. Thus, it was time to get all the words with the len over 5. We used filter and lambda to filter out all words with a len below 5.
+
 ```python
 lst = filter(lambda x: len(x[0]) >5, lst)
 ```
-After that i sorted all the words from lowest to highest, and reversed the order of the list by using ```reverse=True``` and printed the first 10 elements in the reversed list. the output are the 10 words that came up most frequently in the file.
-The code looks something like this
+After that, all the words were sorted from lowest to highest, and reversed the order of the list by using reverse=True and printed the first 10 elements in the reversed list. The output are the 10 words that came up most frequently in the file.
+The code looks something like this:
+
 ```python
 return sorted(lst, key=my_sort, reverse=True)[:10]
 ```
+Also, in part3.py, minimum len of the word to 5 and over was set because it’s not allowed to have words with a len of 4 or less as stated in the project instructions.
 
-The top 10 most frequent words in Life if brian are, Brian, Centurion, Crowd, Mother, right, Crucifixion, Pilate, pontius, Crowd and Rogers. The output is the same in part 1.
+The top 10 most frequent words in `life if brian`` are:
+Brian, Centurion, Crowd, Mother, right, Crucifixion, Pilate, pontius, Crowd and Rogers. The output is the same as in part 1.
 
-And lastly the top 10 most frequent words in Swe news are as stated: säger, under, kommer, efter, eller, också, andra, finns, sedan and lastly procent. The output is the same in part 1.
+Lastly, the top 10 most frequent words in ``swe news_2020`` are as stated:
+säger, under, kommer, efter, eller, också, andra, finns, sedan and procent. The output is the same in part 1 as well.
+
 
 - BST and Hash values for the two text files
-```life_of_brian's``` bucket size is 2079, the max bucket size stands at a 16 and lastly the zero bucket ratio is around 0.83. Now the results from the BST map, ```life_of_brian's``` total node count is the exact same as the total bucket size. Its max depth is 28 while the total leaf count is 662.
-```swedish_news_2020's``` Bucket size stands at 384 501 words. Same goes for its total nodes in the BST. Max bucket size for swe news is 682 while zero bucket ratio stands at 0.99. The maximum depth is 83 and the leaf node count is 126 661.
+For the text file ```brian_13525_words.txt```, the bucket list size is 2079, the max bucket size stands at 16 and the zero-bucket ratio for HashSet is around 0.84. Now the results from the BST map, life_of_brian’s total node count is the exact same as the total bucket size. Its max depth is 28 while the total leaf count is 662.
+For the second text file, ```newspaper_15179625_words.txt```, the bucket size stands at 384 501 words. Same goes for its total nodes in the BST. Max bucket size for it is 682 while zero bucket ratio stands at 0.99. The maximum depth is 83 and the leaf node count is 126 661.
 
-* Hash function and efficiency
+* Explain how max bucket size and zero bucket ratio can be used to evaluate the quality of your hash function in HashSet. What are optimal/reasonable/poor values in both cases?
 
 The larger max bucket size is, the worse the quality of the hash function in HashSet is. The reason is that it will take more time to add, contain and remove an element which is less efficient. We want to maintain the O(1) speed. This also means the more buckets filled the better. So a low zero bucket ratio is also optimal. To find the resonable values we decided on creating a list where we input 100 random words into a hash list and repeated that 5 times, increasing the word count by 200 each time we repeat, to see the average max bucket size and zero bucket ratio.
 
@@ -100,7 +106,7 @@ for i in new_word:
 
 As you can see here, the max bucket size is increasing ever so slowly, and that is to be expected with such a large array of words, some words are bound to have the same hash value. The zero bucket ratio is fluctuating though. This is because everytime we rehash, we get many empty buckets in our list. So The zero bucket ratio stays fluctuating.
 
-* What does the max depth and leaf count have to do with the efficiency?
+* Explain how max depth and leaf count can be used to evaluate the efficiency of the BstMap. What are optimal/reasonable/poor values in both cases?
 
 
 The efficiency of a binary search tree depends ofcourse how its built and the insertion order of the keys or values. A balanced search tree is the most efficient tree, a tree that is built to be filled at each level and that has as low of a depth as possible. So if we got an array  The more leaf nodes the better. That is because the less levels there are in a binary tree, the faster it takes to search trough it. That is why a large maximum depth is not as time efficient as a balanced tree. 
@@ -145,7 +151,9 @@ So the reasonable values for max depth and count leaves differs depending on the
 
 
 ## Project conclusions and lessons learned
-We separate technical issues from project related issues.
+
+In summary, the project is about algorithms and data structures. In this project we have solved three tasks and we have mainly used HashSet and BST. The lessons learned due to the project are the different algorithm techniques and what is HashSet and BST, plus how to use them in python. Also, this project made it easy for us to understand Python classes
+
 ### Technical issues 
 The most time consuming part by far was the BST map and understanding what hashing and hash values are. Binary search trees were a whole new experience from anything we've encountered before. This was a structured way to store information like we havent seen before in programming. Working on it without having the faintest idea how they work was not an option. We had to thoroughly research about the subjects and how they worked. The more we read, the more complicated it was.
 ### Bst
@@ -158,8 +166,6 @@ Reading and understanding what im working with fundamentally helped way more in 
 
 The results would probably be cleaner if we had more time. Easier to read code, more time efficient and all in all better code. Of course you dont always have time but in this hypothetical scenario, i would probably say the outcome wouldve been a cleaner result.
 
-## Project conclusions and lessons learned
-In summary, the project is about algorithms and data structures. In this project we have solved three tasks and we have mainly used HashSet and BST. The lessons learned due to the project are the different algorithm techniques and what is HashSet and BST, plus how to use them in python. Also, this project made it easy for us to understand Python classes.
 
 
 ### Project issues
