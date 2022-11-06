@@ -6,6 +6,11 @@ Program: CTMAT and NGDPV
 Course: 1DT901 and 1DV501
 Date of submission: 2022-11-06
 
+## Introduction 
+This project, mini-project, is a part of the courses 1DT901/1DV501 and it is a project in algorithms and data structures. In this project, three different tasks are going to be solved. Task 1, Count unique words 1, in this task the number of unique words will be counted from the files ‘life of brain’ and ‘swedish_news_2020’ with the help of Python set class. Also, in task 1, the ten most frequently used words having a length larger than 4 in each file have to be produced with the help of Python dictionary class. Task 2, Implementing data structures, in this assignment we will practice, Binary Search Trees (BST) and Hashing, which are techniques suitable for implementing dictionaries and sets.
+The last task, Count unique words 2, same requirements as task 1, but this time should our hash based set and BST based map be used.
+
+
 ## Part 1: Count unique words 1
 ``life_of_brian`` had 2064 special/unique words while  ``swedish_news_2020`` had rougly 384000 words. We counted the special/unique words by simply using pythons built in sets. A set does not allow two of the same words to exist in the same set, so firstly we lower and split each word in the text files to get them prepared. And after that we place the words in a for loop to get rid of the special symbols by using ```word.strip()```
 The code looks something like this.
@@ -143,9 +148,9 @@ So the reasonable values for max depth and count leaves differs depending on the
 We separate technical issues from project related issues.
 ### Technical issues 
 The most time consuming part by far was the BST map and understanding what hashing and hash values are. Binary search trees were a whole new experience from anything we've encountered before. This was a structured way to store information like we havent seen before in programming. Working on it without having the faintest idea how they work was not an option. We had to thoroughly research about the subjects and how they worked. The more we read, the more complicated it was.
-# Bst
+### Bst
 But once we learned about recursive functions everything became clearer. Working with recursive methots simplified our learning experience with BST maps quite significantly. Also it became much more fun. So Id say working with binary search trees when we had no idea what it was in the beginning was the most difficult part of the project.
-# Hashing
+### Hashing
 For hashing we did not have such luck. It took a very long time to actually understand how to get the hash value of a string. We learnt about ASCII and ord(). If we took the time to prematurely ask about hashing during the first few laboratories it wouldve taken us much less time to complete.
 
 The most important lesson is most likely not to look at code as an explanation, but just a watered down solution. For example, reading code about recursive methods did not help me at all. I was just as confused as i was coming into it. 
@@ -153,23 +158,26 @@ Reading and understanding what im working with fundamentally helped way more in 
 
 The results would probably be cleaner if we had more time. Easier to read code, more time efficient and all in all better code. Of course you dont always have time but in this hypothetical scenario, i would probably say the outcome wouldve been a cleaner result.
 
+## Project conclusions and lessons learned
+In summary, the project is about algorithms and data structures. In this project we have solved three tasks and we have mainly used HashSet and BST. The lessons learned due to the project are the different algorithm techniques and what is HashSet and BST, plus how to use them in python. Also, this project made it easy for us to understand Python classes.
+
+
 ### Project issues
 We communicated every day or every other day. We were very active on telling eachother how far we've gotten and what we've done and implemented.
 
 - For each individual team member: 
-## Abdul
-* Contributors and co-contributors?
-Abdul was the main contributor for the BST maps and part 3 while Sedra was the main contributor for the hashing and part 1. Ofcourse we both worked on everything together but we tried splitting up the work in the beginning. Every update time we talked we explained what we implemented and what didnt work. And we tried solving it.
-* Estimate hours spend each week (on average)
-Cirka 3 hours every day so around 21 hours per week.
-## Sedra
-What took me a long time was understanding how to count the hash value for a string, I think there aren’t enough information in the lectures and slides about the ord function and ASCII. Therefore, the thing I would have done differently is asking from the beginning about the hash value function during the laboratory so this will not take as long time as it did.
-In this project I’ve learned about the different algorithm techniques. Also, the definition about words based on this theme such as rehash, O-notation, hash value, etc. In addition to that I’ve learned how use to Python classes.
-* Estimate hours spend each week (on average)
-Also around 3 hours per day.
+Contributors and co-contributors?
+Abdul was the main contributor for the BST maps and part 3 while Sedra was the main contributor for the hashing and part 1. Of course we both worked on everything together but we tried splitting up the work in the beginning. Every update time we talked we explained what we implemented and what didn’t work. And we tried solving it.
+Estimate hours spend each week (on average)
+About 3 hours every day so around 21 hours per week.(Abdul)
+For me it took me around 20 hours each week. (Sedra)
+What lessons have you learned? What should you have done differently if you now were facing a similar project.
+As stated before, reading thouroughly about the subject is a great help. So I’ll be sure to bring that with me going forward in other projects. (Abdul)
+If I’m facing a similar project, I would use every lab opportunity to get help on what I’m stuck on like git and the hash function. (Sedra)
 
 
 
- - What lessons have you learned? What should you have done differently if you now were facing a similar project.
+
+* What lessons have you learned?
  As stated before, reading thouroughly about the subject is a great help. So ill be sure to bring that with me going forward in other projects. 
 
