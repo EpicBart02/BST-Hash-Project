@@ -63,7 +63,6 @@ The code looks something like this
 ```python
 return sorted(lst, key=my_sort, reverse=True)[:10]
 ```
-Also in part3.py, i set the minimum len of the word to 5 and over because its not allowed to have words with a len of 4 or less as stated in the project instructions. 
 
 The top 10 most frequent words in Life if brian are, Brian, Centurion, Crowd, Mother, right, Crucifixion, Pilate, pontius, Crowd and Rogers. The output is the same in part 1.
 
@@ -73,16 +72,56 @@ And lastly the top 10 most frequent words in Swe news are as stated: säger, und
 ```life_of_brian's``` bucket size is 2079, the max bucket size stands at a 16 and lastly the zero bucket ratio is around 0.83. Now the results from the BST map, ```life_of_brian's``` total node count is the exact same as the total bucket size. Its max depth is 28 while the total leaf count is 662.
 ```swedish_news_2020's``` Bucket size stands at 384 501 words. Same goes for its total nodes in the BST. Max bucket size for swe news is 682 while zero bucket ratio stands at 0.99. The maximum depth is 83 and the leaf node count is 126 661.
 * Explain how max bucket size and zero bucket ratio can be used to evaluate the quality of your hash function in HashSet. What are optimal/reasonable/poor values in both cases?
-* Explain how max depth and leaf count can be used to evaluate the efficiency of the BstMap. What are optimal/reasonable/poor values in both cases?
-The efficiency of a binary search tree depends ofcourse how its built. A balanced search tree is the most efficient, a tree that is built to be filled at each level and that has as low of a depth as possible. The more leaf nodes the better. That is because the less levels there are in a binary tree, the faster it takes to search trough it. That is why a large maximum depth is not as time efficient as a balanced tree. 
-The best case scenario for leaf nodes is when each non leaf has at most two children. 
+* What does the max depth and leaf count have to do with the efficiency?
+The efficiency of a binary search tree depends ofcourse how its built and the insertion order of the keys or values. A balanced search tree is the most efficient tree, a tree that is built to be filled at each level and that has as low of a depth as possible. So if we got an array  The more leaf nodes the better. That is because the less levels there are in a binary tree, the faster it takes to search trough it. That is why a large maximum depth is not as time efficient as a balanced tree. 
+A balanced tree has the same depth on the left and right side of the tree. So that would be the optimal value for max depth. A value that stays true for both the left and right side of the tree. Of course that is unelikely to happen in real binary trees. An unreasonable value is a tree with a very large max depth value. This is because it will take the tree more recursions to find the word its looking for. And for a resonable/normal value, i tried working with binary trees in ```test.py``` to try out different starigies. 
 
+I created a list to keep track of the values and to check what the normal output for a randomized list of strings is. The first 5 tries i created a list with 10 different words and created a loop that took out a random word from the list and put it into a binary map. i Looped that around 20 times per session and the results i got were pretty similar.
+```python
+words = ["Abraham", "Corey", "Ella", "Gray", "James", "Lorry", "Night", "Porrige", "Ramsay", "Ulric"]
+for l in range(20):
+    lord = random.choice(words)
+    map.put(lord, 1)
+
+```
+
+|     Tries     | Max depth       | Leaf count    |
+|:------------- |:---------------:| -------------:|
+| Try one       |        4        |              3|
+| Try two       |        4        |              3|
+| Try three     |        3        |              3|
+| Try four      |        4        |              2|
+| Try five      |        4        |              4|
+
+As you can see, the first five tries similar. The max depth is slightly higher than the leaf count because of the small word choice and small tree size. But now im increasing the word sample size by grabbing ```life_of_brian's``` words. Now that our word list is much larger the differences are also bigger. So for each try in the next five tries, i will increase the word size by 10. Try 6 = 30 words, try 7 = 40 words and so on.
+```python
+word = open(file, 'r', encoding="utf-8")
+words = []
+words.extend(word)
+for l in range(70):
+    lord = random.choice(words)
+    map.put(lord, 1)
+```
+
+|     Tries     | Max depth       | Leaf count    |
+|:------------- |:---------------:| -------------:|
+| Try six(30)   |        9        |             10|
+| Try seven(40) |       10        |             12|
+| Try eight(50) |       10        |             15|
+| Try nine(60)  |       11        |             19|
+| Try ten(70)   |       10        |             21|
+
+So the reasonable values for max depth and count leaves differs depending on the list size and words available. But normally, a smaller list with a smaller list index equals larger max depth and smaller count leaves while a larger list with a larger selection of words equals a larger leaf count and smaller maximum depth.
 
 
 ## Project conclusions and lessons learned
 We separate technical issues from project related issues.
 ### Technical issues 
-The most time consuming part by far was the BST map. Binary search trees were a whole new experience from anything we've encountered before. This was a structured way to store information like we havent seen before in programming. Working on it without having the faintest idea how they work was not an option. We had to thoroughly research about binary search trees and how they worked. The more we read, the more complicated it was. But once we learned about recursive functions everything became clearer. Working with recursive methots simplified our learning experience with BST maps quite significantly. Also it became much more fun. So Id say working with binary search trees when we had no idea what it was in the beginning was the most difficult part of the project.
+The most time consuming part by far was the BST map and what hashing truly is. Binary search trees were a whole new experience from anything we've encountered before. This was a structured way to store information like we havent seen before in programming. Working on it without having the faintest idea how they work was not an option. We had to thoroughly research about the subjects and how they worked. The more we read, the more complicated it was.
+*Bst
+But once we learned about recursive functions everything became clearer. Working with recursive methots simplified our learning experience with BST maps quite significantly. Also it became much more fun. So Id say working with binary search trees when we had no idea what it was in the beginning was the most difficult part of the project.
+*Hashing
+For hashing we did not have such luck. It took a very long time to actually understand how to get the hash value of a string. We learnt about ASCII and ord(). If we took the time to prematurely ask about hashing during the first few laboratories it wouldve taken us much less time to complete.
 
 The most important lesson is most likely not to look at code as an explanation, but just a watered down solution. For example, reading code about recursive methods did not help me at all. I was just as confused as i was coming into it. 
 Reading and understanding what im working with fundamentally helped way more in my work. Looking at code does not do anything to teach us how it works, just what the solution COULD be. And we did not like that so researching how it fundamentally worked was the best decision we made. And we're sure to bring that with us in later studies aswell. Looking at solutions does not teach us anything, but understanding the methods and how it fundamentally works teaches us quite a lot.
@@ -93,9 +132,16 @@ The results would probably be cleaner if we had more time. Easier to read code, 
 We communicated every day or every other day. We were very active on telling eachother how far we've gotten and what we've done and implemented.
 
 - For each individual team member: 
- 	* Contributors and co-contributors?
-	Abdul was the main contributor for the BST maps and part 3 while Sedra was the main contributor for the hashing and part 1. Ofcourse we both worked on everything together but we tried splitting up the work in the beginning. Every update time we talked we explained what we implemented and what didnt work. And we tried solving it.(Abdul)
- 	* Estimate hours spend each week (on average)
-    Cirka 3 hours every day so around 21 hours per week.(Abdul)
+## Abdul
+* Contributors and co-contributors?
+Abdul was the main contributor for the BST maps and part 3 while Sedra was the main contributor for the hashing and part 1. Ofcourse we both worked on everything together but we tried splitting up the work in the beginning. Every update time we talked we explained what we implemented and what didnt work. And we tried solving it.
+* Estimate hours spend each week (on average)
+Cirka 3 hours every day so around 21 hours per week.
+## Sedra
+What took me a long time was understanding how to count the hash value for a string, I think there aren’t enough information in the lectures and slides about the ord function and ASCII. Therefore, the thing I would have done differently is asking from the beginning about the hash value function during the laboratory so this will not take as long time as it did.
+In this project I’ve learned about the different algorithm techniques. Also, the definition about words based on this theme such as rehash, O-notation, hash value, etc. In addition to that I’ve learned how use to Python classes.
+
+
  - What lessons have you learned? What should you have done differently if you now were facing a similar project.
- As stated before, reading thouroughly about the subject is a great help. So ill be sure to bring that with me going forward in other projects. (Abdul)
+ As stated before, reading thouroughly about the subject is a great help. So ill be sure to bring that with me going forward in other projects. 
+
