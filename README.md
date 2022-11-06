@@ -71,8 +71,33 @@ And lastly the top 10 most frequent words in Swe news are as stated: säger, und
 - BST and Hash values for the two text files
 ```life_of_brian's``` bucket size is 2079, the max bucket size stands at a 16 and lastly the zero bucket ratio is around 0.83. Now the results from the BST map, ```life_of_brian's``` total node count is the exact same as the total bucket size. Its max depth is 28 while the total leaf count is 662.
 ```swedish_news_2020's``` Bucket size stands at 384 501 words. Same goes for its total nodes in the BST. Max bucket size for swe news is 682 while zero bucket ratio stands at 0.99. The maximum depth is 83 and the leaf node count is 126 661.
-* Explain how max bucket size and zero bucket ratio can be used to evaluate the quality of your hash function in HashSet. What are optimal/reasonable/poor values in both cases?
+
+* Hash function and efficiency
+
+The larger max bucket size is, the worse the quality of the hash function in HashSet is. The reason is that it will take more time to add, contain and remove an element which is less efficient. We want to maintain the O(1) speed. This also means the more buckets filled the better. So a low zero bucket ratio is also optimal. To find the resonable values we decided on creating a list where we input 100 random words into a hash list and repeated that 5 times, increasing the word count by 200 each time we repeat, to see the average max bucket size and zero bucket ratio.
+
+```python
+for l in range(100):
+    element = random.choice(words)
+    new_word.append(element)
+for i in new_word:
+    bucket.add(i)
+```
+
+
+| Tries              | Max bct size    | Zero bkt ratio |
+|:------------------ |:---------------:| --------------:|
+| Try one(100)       |        3        |            0.52|
+| Try two(300)       |        4        |            0.46|
+| Try three(500)     |        5        |            0.58|
+| Try four(700)      |        5        |            0.51|
+| Try five(900)      |        7        |            0.48|
+
+As you can see here, the max bucket size is increasing ever so slowly, and that is to be expected with such a large array of words, some words are bound to have the same hash value. The zero bucket ratio is fluctuating though. This is because everytime we rehash, we get many empty buckets in our list. So The zero bucket ratio stays fluctuating.
+
 * What does the max depth and leaf count have to do with the efficiency?
+
+
 The efficiency of a binary search tree depends ofcourse how its built and the insertion order of the keys or values. A balanced search tree is the most efficient tree, a tree that is built to be filled at each level and that has as low of a depth as possible. So if we got an array  The more leaf nodes the better. That is because the less levels there are in a binary tree, the faster it takes to search trough it. That is why a large maximum depth is not as time efficient as a balanced tree. 
 A balanced tree has the same depth on the left and right side of the tree. So that would be the optimal value for max depth. A value that stays true for both the left and right side of the tree. Of course that is unelikely to happen in real binary trees. An unreasonable value is a tree with a very large max depth value. This is because it will take the tree more recursions to find the word its looking for. And for a resonable/normal value, i tried working with binary trees in ```test.py``` to try out different starigies. 
 
@@ -117,10 +142,10 @@ So the reasonable values for max depth and count leaves differs depending on the
 ## Project conclusions and lessons learned
 We separate technical issues from project related issues.
 ### Technical issues 
-The most time consuming part by far was the BST map and what hashing truly is. Binary search trees were a whole new experience from anything we've encountered before. This was a structured way to store information like we havent seen before in programming. Working on it without having the faintest idea how they work was not an option. We had to thoroughly research about the subjects and how they worked. The more we read, the more complicated it was.
-*Bst
+The most time consuming part by far was the BST map and understanding what hashing and hash values are. Binary search trees were a whole new experience from anything we've encountered before. This was a structured way to store information like we havent seen before in programming. Working on it without having the faintest idea how they work was not an option. We had to thoroughly research about the subjects and how they worked. The more we read, the more complicated it was.
+# Bst
 But once we learned about recursive functions everything became clearer. Working with recursive methots simplified our learning experience with BST maps quite significantly. Also it became much more fun. So Id say working with binary search trees when we had no idea what it was in the beginning was the most difficult part of the project.
-*Hashing
+# Hashing
 For hashing we did not have such luck. It took a very long time to actually understand how to get the hash value of a string. We learnt about ASCII and ord(). If we took the time to prematurely ask about hashing during the first few laboratories it wouldve taken us much less time to complete.
 
 The most important lesson is most likely not to look at code as an explanation, but just a watered down solution. For example, reading code about recursive methods did not help me at all. I was just as confused as i was coming into it. 
@@ -140,6 +165,9 @@ Cirka 3 hours every day so around 21 hours per week.
 ## Sedra
 What took me a long time was understanding how to count the hash value for a string, I think there aren’t enough information in the lectures and slides about the ord function and ASCII. Therefore, the thing I would have done differently is asking from the beginning about the hash value function during the laboratory so this will not take as long time as it did.
 In this project I’ve learned about the different algorithm techniques. Also, the definition about words based on this theme such as rehash, O-notation, hash value, etc. In addition to that I’ve learned how use to Python classes.
+* Estimate hours spend each week (on average)
+Also around 3 hours per day.
+
 
 
  - What lessons have you learned? What should you have done differently if you now were facing a similar project.
